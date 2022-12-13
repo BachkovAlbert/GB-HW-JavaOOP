@@ -52,10 +52,6 @@ public abstract class BaseHero implements BaseInterface {
         return damage;
     }
 
-    public ArrayList<BaseHero> getParty() {
-        return party;
-    }
-
     public int getHealth() { 
         return health;
     }
