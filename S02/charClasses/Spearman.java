@@ -1,7 +1,9 @@
 package S02.charClasses;
 
-public class Spearman extends Base {
-    public Spearman() {
-        super(4, 5, 0, new int[]{1,3}, 10, 4, false, false, "Spearman");
+import java.util.ArrayList;
+
+public class Spearman extends BaseHero {
+    public Spearman(ArrayList<BaseHero> party) {
+        super(4, 5, 0, new int[]{1,3}, 10, 4, false, false, "Spearman", party);
     }
 }

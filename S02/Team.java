@@ -1,30 +1,30 @@
 package S02;
 
-import S01.charClasses.*;
+import S02.charClasses.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Team {
-    public static ArrayList<Base> teamBuild(int teamCount) {
+    public static ArrayList<BaseHero> teamBuild(int teamCount, String [] lineUp) {
         Random rdm = new Random();
-        ArrayList<Base> team = new ArrayList<>();
+        ArrayList<BaseHero> team = new ArrayList<>();
         for (int i = 0; i < teamCount; i++) {
-            switch (rdm.nextInt(7)) {
-                case 0 -> team.add(new Peasant());
-                case 1 -> team.add(new Robber());
-                case 2 -> team.add(new Sniper());
-                case 3 -> team.add(new Wizard());
-                case 4 -> team.add(new Spearman());
-                case 5 -> team.add(new Xbowman());
-                case 6 -> team.add(new Monk());
+            switch (lineUp[rdm.nextInt(lineUp.length)]) {
+                case "Peasant" -> team.add(new Peasant(team));
+                case "Robber" -> team.add(new Robber(team));
+                case "Sniper" -> team.add(new Sniper(team));
+                case "Wizard" -> team.add(new Wizard(team));
+                case "Spearman" -> team.add(new Spearman(team));
+                case "Xbowman" -> team.add(new Xbowman(team));
+                case "Monk" -> team.add(new Monk(team));
             }
         }
         return team;
     }
 
-    public static void teamFilter(Base hero, ArrayList<Base> team) {
-        for (Base pers : team) {
-            if (pers.getClass() == hero.getClass()) System.out.println(pers);
+    public static void teamFilter(BaseHero hero, ArrayList<BaseHero> team) {
+        for (BaseHero pers : team) {
+            if (pers.getClass() == hero.getClass()) System.out.println(pers.getInfo());
         }
     }
 }

@@ -1,8 +1,9 @@
 package S02.charClasses;
 
-public class Peasant extends Base {
+import java.util.ArrayList;
 
-    public Peasant() {
-        super(1, 1, 0, new int[]{1,1}, 1, 3, true, false, "Peasant");
-    }
+public class Peasant extends BaseHero {
+    public Peasant(ArrayList<BaseHero> party) {
+        super(1, 1, 0, new int[]{1,1}, 1, 3, true, false, "Peasant", party);
+    }    
 }
