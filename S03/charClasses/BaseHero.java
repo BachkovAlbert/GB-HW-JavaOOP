@@ -1,9 +1,8 @@
 package S03.charClasses;
 
+import S03.BaseInterface;
 import java.util.Arrays;
 import java.util.ArrayList;
-
-import S03.BaseInterface;
 
 public abstract class BaseHero implements BaseInterface {
     protected int attack;
@@ -17,8 +16,9 @@ public abstract class BaseHero implements BaseInterface {
     protected boolean magic;          
     protected String name;
     protected ArrayList<BaseHero> party; 
+    protected int [] position = new int[2];
 
-    public BaseHero(int attack, int defence, int shots, int[] damage, int health, int speed, boolean delivery, boolean magic, String name, ArrayList<BaseHero> party) {
+    public BaseHero(int attack, int defence, int shots, int[] damage, int health, int speed, boolean delivery, boolean magic, String name, ArrayList<BaseHero> party, int x, int y) { 
         this.attack = attack;
         this.defence = defence;
         this.shots = shots;
@@ -29,12 +29,14 @@ public abstract class BaseHero implements BaseInterface {
         this.magic = magic;
         this.name = name;
         this.party = party; 
+        this.position[0] = x;       
+        this.position[1] = y;
     }
 
     @Override
     public String getInfo() {
         return "attack = " + attack +
-                ", protection = " + defence +
+                ", defence = " + defence +
                 ", shots = " + shots +
                 ", damage = " + Arrays.toString(damage) +
                 ", health = " + health +
@@ -57,6 +59,18 @@ public abstract class BaseHero implements BaseInterface {
     }
     public int getMaxHealth() { 
         return maxHealth;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    // public int[] getPosition() {
+    //     return position;
+    // }
+
+    public boolean isEqualPos(int[] pos) {
+        return this.position[0]==pos[0] && this.position[1]==pos[1];
     }
 
     @Override

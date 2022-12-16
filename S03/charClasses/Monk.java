@@ -3,12 +3,12 @@ package S03.charClasses;
 import java.util.ArrayList;
 
 public class Monk extends BaseHero {
-    public Monk(ArrayList<BaseHero> party) {
-        super(12, 7, 0, new int[]{-4,-4}, 30, 5, false, true, "Monk", party);
+    public Monk(ArrayList<BaseHero> party, int x, int y) {
+        super(12, 7, 0, new int[]{-4,-4}, 30, 5, false, true, "Monk", party, x, y);
     }
 
-    public Monk(int attack, int defence, int shots, int[] damage, int health, int speed, boolean delivery, boolean magic, String name, ArrayList<BaseHero> party){
-        super(attack, defence, shots, damage, health, speed, delivery, magic, name, party);
+    public Monk(int attack, int defence, int shots, int[] damage, int health, int speed, boolean delivery, boolean magic, String name, ArrayList<BaseHero> party, int x, int y){
+        super(attack, defence, shots, damage, health, speed, delivery, magic, name, party, x, y);
     }
 
     public int mostWoundedHero(ArrayList<BaseHero> party){
