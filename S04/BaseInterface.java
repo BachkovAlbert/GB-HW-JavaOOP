@@ -4,8 +4,6 @@ import S04.charClasses.BaseHero;
 import java.util.ArrayList;
 
 public interface BaseInterface{
-    
-    void step(ArrayList<BaseHero> party);
-
+    void step(ArrayList<BaseHero> nparty);
     String getInfo();
 }

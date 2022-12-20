@@ -1,22 +1,23 @@
 package S04.charClasses;
-
 import S04.BaseInterface;
+
 import java.util.Arrays;
 import java.util.ArrayList;
 
-public abstract class BaseHero implements BaseInterface {
+    public abstract class BaseHero implements BaseInterface{  
     protected int attack;
     protected int defence;
     protected int shots;
     protected int[] damage;
     protected int health;  
 	protected int maxHealth;  
-    protected int speed;
+    public int speed;           
     protected boolean delivery;       
     protected boolean magic;          
     protected String name;
     protected ArrayList<BaseHero> party; 
-    protected int [] position = new int[2];
+    protected String status;
+    protected Vector2 position;
 
     public BaseHero(int attack, int defence, int shots, int[] damage, int health, int speed, boolean delivery, boolean magic, String name, ArrayList<BaseHero> party, int x, int y) { 
         this.attack = attack;
@@ -29,8 +30,8 @@ public abstract class BaseHero implements BaseInterface {
         this.magic = magic;
         this.name = name;
         this.party = party; 
-        this.position[0] = x;       
-        this.position[1] = y;
+        this.position = new Vector2(x, y);
+        this.status = "stand";
     }
 
     @Override
@@ -46,34 +47,41 @@ public abstract class BaseHero implements BaseInterface {
                 ", - " + name;
     }    
 
-    public void damage(int damage) {    
-        this.health = health - damage;
-    }
-
-    public int[] getDamage() {
-        return damage;
+    protected void damage(int damage) {    
+        health = health - damage;
+        if (health <= 0) {
+            status = "dead";
+            health = 0;
+        }
+        if (health > maxHealth) health = maxHealth;
     }
 
     public int getHealth() { 
         return health;
     }
-    public int getMaxHealth() { 
-        return maxHealth;
-    }
-
+    
     public String getName(){
         return name;
     }
 
-    // public int[] getPosition() {
-    //     return position;
-    // }
-
-    public boolean isEqualPos(int[] pos) {
-        return this.position[0]==pos[0] && this.position[1]==pos[1];
+    public Vector2 getPosition() {
+        return position;
     }
 
     @Override
-    public void step(ArrayList<BaseHero> party) {
+    public void step(ArrayList<BaseHero> nparty) {
+    }
+
+    protected int damageValue (BaseHero h) {
+        int flag = attack - h.defence;
+        int value = 0;
+        if (flag == 0) value = ((damage[0] + damage[1]) / 2);
+        if (flag > 0) value = damage[1];
+        if (flag < 0) value = damage[0];
+        return value;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

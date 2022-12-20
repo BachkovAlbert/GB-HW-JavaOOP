@@ -11,28 +11,21 @@ public class Monk extends BaseHero {
         super(attack, defence, shots, damage, health, speed, delivery, magic, name, party, x, y);
     }
 
-    public int mostWoundedHero(ArrayList<BaseHero> party){
-        double residueHP = party.get(0).getHealth() / party.get(0).getMaxHealth();
-        int indexWoundedHero = 0;
-        for (int i = 1; i < party.size(); i++) {
-            double hpLeftover = party.get(i).getHealth() / party.get(i).getMaxHealth();
-            if (hpLeftover < residueHP){
-                residueHP = hpLeftover;
-                indexWoundedHero = i;
-            }
-        }
-        return indexWoundedHero;
-    }
     @Override
-    public void step(ArrayList<BaseHero> party) {
-        int indexWoundedHero = mostWoundedHero (party);
-        int currentHPWoundedHero = party.get(indexWoundedHero).getHealth();
-        int maxHPWoundedHero = party.get(indexWoundedHero).getMaxHealth();
-        for (int i = 0; i < Math.abs(getDamage()[0]); i++) {
-            if (currentHPWoundedHero + 1 < maxHPWoundedHero){
-                currentHPWoundedHero += 1;
+    public void step(ArrayList<BaseHero> nparty) {
+        if (status.equals("dead")) return;
+        double mostDamaged = party.get(0).maxHealth -
+                party.get(0).health;
+            int mostDamagedInd = 0;
+            for (int i = 1; i < party.size(); i++) {
+                if ((party.get(i).maxHealth -
+                        party.get(i).health) > mostDamaged) {
+                    mostDamaged = party.get(i).maxHealth -
+                            party.get(i).health;
+                    mostDamagedInd = i;
+                }
             }
-        }
-        party.get(indexWoundedHero).damage(getDamage()[0]);
+        party.get(mostDamagedInd).damage(damage[0]);
+        party.get(mostDamagedInd).status = "stand"; 
     }
 }
